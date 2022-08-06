@@ -1,0 +1,25 @@
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (60, 'ALGEBRA LINEAR', 2020, 1,                              19, 1);
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (61, 'CONSTRUCAO DE ALGORITMOS', 2020, 1,                    4, 10);
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (62, 'FUNDAMENTOS MATEMATICOS', 2020, 1,                     5, 17);
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (63, 'LABORATORIO DE PROGRAMACAO', 2020, 1,                 4, 25);
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (64, 'INTRODUCAO A CIENCIA DA COMPUTACAO', 2020, 1,          6, 22);
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (65, 'FISICA APLICADA A CIENCIA DA COMPUTACAO', 2020, 1,    8,16 );
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (66, 'ARQUITETURA E ORGANIZACAO DE COMPUTADORES I', 2020, 1,  6, 3);
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (67, 'ESTRUTURA DE DADOS II', 2020, 1,                    19, 14);
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (68, 'PROBABILDADE E ESTATISTICA', 2020, 1,                13, 32);
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (69, 'TEORIA DOS GRAFOS', 2020, 1,                          7, 42);
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (70, 'PROGRAMACAO WEB', 2020, 1,                            9, 36);
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (71, 'SISTEMAS OPERACIONAIS', 2020, 1,                    6, 40);
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (72, 'INTERACAO HOMEM-MAQUINA', 2020, 1,                9, 21);
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (73, 'PROGRAMACAO DE DISPOSITIVOS MOVEIS', 2020, 1,        2, 34);
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (74, 'PROCESSAMENTO DIGITAL DE IMAGENS', 2020, 1,        6, 32);
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (75, 'ENGENHARIA DE SOFTWARE ', 2020, 1,                     2, 12);
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (76, 'BANCO DE DADOS II', 2020, 1,                        9, 6);
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (77, 'METODOLOGIA DE PESQUISA CIENTIFICA', 2020, 1,        4, 28);
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (78, 'PROJETO AVANCADO DE ALGORITMOS', 2020, 1,         19, 37);
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (79, 'GRAMATICAS E COMPILADORES', 2020, 1,                9, 19);
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (80, 'MINERACAO DE DADOS', 2020, 1,                        4, 29);
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (81, 'TRABALHO DE CONCLUSAO DE CURSO I', 2020, 1,        4, 43);
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (82, 'CALCULO II', 2020, 1,                                20, 8);
+
+INSERT INTO public.disciplina (id, nome, ano, semestre, id_professor, id_disciplina_matriz) VALUES (83, 'TRABALHO DE CONCLUSAO DE CURSO II', 2020, 1,        4, 44);
