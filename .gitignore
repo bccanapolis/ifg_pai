@@ -31,3 +31,10 @@ tests/_support/_generated
 
 #vagrant folder
 /.vagrant
+
+# modules
+modules
+!modules/api
+
+.env*
+!.env.example
