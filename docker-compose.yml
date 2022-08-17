@@ -45,7 +45,7 @@ services:
     ports:
       - "8090:80"
       - "8091:443"
-    command: bash -c "chmod 777 /app/web/assets && chmod 777 /app/runtime && composer install && php ./yii migrate --interactive=0 && forego start -r -f /root/Procfile"
+    command: bash -c "chmod 777 /app/web/assets && chmod 777 /app/runtime && composer install && php ./yii migrate --interactive=0 && export XDEBUG_CONFIG=\"remote_connect_back=0 remote_enable=1 remote_host=172.17.0.1\" && supervisord -c  /etc/supervisor/supervisord.conf"
     depends_on:
       db:
         condition: service_healthy

@@ -2,16 +2,16 @@
 
 /* @var $this yii\web\View */
 
-use app\models\Aluno;
-use app\models\DisciplinaMatriz;
-use app\models\Professor;
+//use app\models\Aluno;
+//use app\models\DisciplinaMatriz;
+//use app\models\Professor;
 
 
 $this->title = 'PAI';
 
-$countAlunos = Aluno::find()->count();
-$countProfessores = Professor::find()->count();
-$countDisciplinas = DisciplinaMatriz::find()->count();
+//$countAlunos = Aluno::find()->count();
+//$countProfessores = Professor::find()->count();
+//$countDisciplinas = DisciplinaMatriz::find()->count();
 ?>
 <style>
     .shadow-boxes {
@@ -84,21 +84,21 @@ $countDisciplinas = DisciplinaMatriz::find()->count();
                     <div class="col-md-4 col-sm-4 col-xs-12 text-center " style="padding: 20px">
                         <div class="shadow-boxes">
                             <i class="fa fa-users fa-3x text-color-theme"></i>
-                            <h3 class="text-color-black" style="font-weight: bold"><?= $countAlunos ?></h3>
+<!--                            <h3 class="text-color-black" style="font-weight: bold">--><?//= $countAlunos ?><!--</h3>-->
                             <span class="text-color-black">Alunos</span>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-12 text-center" style="padding: 20px">
                         <div class="shadow-boxes">
                             <i class="fa fa-users fa-3x text-color-theme"></i>
-                            <h3 class="text-color-black" style="font-weight: bold"><?= $countProfessores ?></h3>
+<!--                            <h3 class="text-color-black" style="font-weight: bold">--><?//= $countProfessores ?><!--</h3>-->
                             <span class="text-color-black">Professores</span>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-12 text-center" style="padding: 20px">
                         <div class="shadow-boxes">
                             <i class="fa fa-users fa-3x text-color-theme"></i>
-                            <h3 class="text-color-black" style="font-weight: bold"><?= $countDisciplinas ?></h3>
+<!--                            <h3 class="text-color-black" style="font-weight: bold">--><?//= $countDisciplinas ?><!--</h3>-->
                             <span class="text-color-black">Disciplinas</span>
                         </div>
                     </div>

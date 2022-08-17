@@ -1,0 +1,9 @@
+version: '3.5'
+
+services:
+   app:
+    env_file:
+      - .env.development
+    ports:
+      - "8080:8080"
+    command: bash -c "chmod 777 /app/web/assets && chmod 777 /app/runtime && composer install && php ./yii migrate --interactive=0 && yii serve 0.0.0.0"

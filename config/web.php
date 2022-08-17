@@ -1,5 +1,5 @@
 <?php
-use kartik\mpdf\Pdf;
+//use kartik\mpdf\Pdf;
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
@@ -37,16 +37,16 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            'viewPath' => '@app/mailer',
-            'useFileTransport' => false,
-            'transport' => [
-                'class' => 'Swift_SmtpTransport',
-                'host' => 'smtp.gmail.com',
-                'username' => '',
-                'password' => '',
-                'port' => '587',
-                'encryption' => 'tls',
-            ],
+//            'viewPath' => '@app/mailer',
+            'useFileTransport' => true,
+//            'transport' => [
+//                'class' => 'Swift_SmtpTransport',
+//                'host' => 'smtp.gmail.com',
+//                'username' => '',
+//                'password' => '',
+//                'port' => '587',
+//                'encryption' => 'tls',
+//            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -75,13 +75,13 @@ $config = [
             'autoloadPath' => '/home/computacaoifg/bccsp/lib/_autoload.php',
             'authSource' => 'default-sp',
         ],
-        'pdf' => [
-            'class' => Pdf::classname(),
-            'format' => Pdf::FORMAT_A4,
-            'orientation' => Pdf::ORIENT_PORTRAIT,
-            'destination' => Pdf::DEST_BROWSER,
-            // refer settings section for all configuration options
-        ]
+//        'pdf' => [
+//            'class' => Pdf::classname(),
+//            'format' => Pdf::FORMAT_A4,
+//            'orientation' => Pdf::ORIENT_PORTRAIT,
+//            'destination' => Pdf::DEST_BROWSER,
+//            // refer settings section for all configuration options
+//        ]
     ],
     'params' => $params,
     'modules' => [

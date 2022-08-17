@@ -27,7 +27,8 @@
     "dektrium/yii2-user": "^0.9.14",
     "trandat1001/yii2-simplesamlphp": "dev-master",
     "lavrentiev/yii2-toastr": "dev-master",
-    "phpoffice/phpspreadsheet": "^1.18"
+    "phpoffice/phpspreadsheet": "^1.18",
+    "webvimark/module-user-management": "^1"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.1.0",

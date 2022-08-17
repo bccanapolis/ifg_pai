@@ -1,7 +1,6 @@
 # phpstorm project files
 .idea
 
-/.idea
 # netbeans project files
 nbproject
 
@@ -14,8 +13,7 @@ nbproject
 Thumbs.db
 
 # composer vendor dir
-/vendor/simplesamlphp/simplesamlphp
-/web/index.php
+/vendor
 
 # composer itself is not needed
 composer.phar
@@ -33,7 +31,3 @@ tests/_support/_generated
 
 #vagrant folder
 /.vagrant
-composer.lock
-config/db.php
-/runtime
-web/uploads

@@ -93,33 +93,33 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        $user = User::find()->where(['id' => Yii::$app->user->id])->one();
-        $countCorretas = 0;
-        $totalPerguntas = 0;
-        if ($user->aluno) {
-            $aluno_id = $user->aluno->id;
-
-            $year = date('Y');
-            $semestre = ((date('m') <= 7) ? 1 : 2);
-
-            $totalPerguntas = Questao::find()->orderBy(['id' => SORT_ASC])
-                ->innerJoin('disciplina', 'disciplina.id = questao.id_disciplina')
-                ->where(['disciplina.ano' => $year])
-                ->where(['disciplina.semestre' => $semestre])
-                ->orderBy('id_disciplina')
-                ->count();
-
-            $countCorretas = Resposta::find()->leftJoin('questao', 'resposta.id_questao = questao.id')
-                ->leftJoin('disciplina', 'disciplina.id = questao.id_disciplina')
-                ->leftJoin('alternativa', 'resposta.id_alternativa = alternativa.id')
-                ->where(['resposta.id_aluno' => $aluno_id, 'disciplina.ano' => $year, 'disciplina.semestre' => $semestre, 'alternativa.correta'=>true])
-                ->distinct('questao.id')->count();
-        }
-
-        return $this->render('main', [
-            'countCorretas' => $countCorretas,
-            'totalPerguntas' => $totalPerguntas,
-            'user' => $user,
-        ]);
+//        $user = User::find()->where(['id' => Yii::$app->user->id])->one();
+//        $countCorretas = 0;
+//        $totalPerguntas = 0;
+//        if ($user->aluno) {
+//            $aluno_id = $user->aluno->id;
+//
+//            $year = date('Y');
+//            $semestre = ((date('m') <= 7) ? 1 : 2);
+//
+//            $totalPerguntas = Questao::find()->orderBy(['id' => SORT_ASC])
+//                ->innerJoin('disciplina', 'disciplina.id = questao.id_disciplina')
+//                ->where(['disciplina.ano' => $year])
+//                ->where(['disciplina.semestre' => $semestre])
+//                ->orderBy('id_disciplina')
+//                ->count();
+//
+//            $countCorretas = Resposta::find()->leftJoin('questao', 'resposta.id_questao = questao.id')
+//                ->leftJoin('disciplina', 'disciplina.id = questao.id_disciplina')
+//                ->leftJoin('alternativa', 'resposta.id_alternativa = alternativa.id')
+//                ->where(['resposta.id_aluno' => $aluno_id, 'disciplina.ano' => $year, 'disciplina.semestre' => $semestre, 'alternativa.correta'=>true])
+//                ->distinct('questao.id')->count();
+//        }
+//
+//        return $this->render('main', [
+//            'countCorretas' => $countCorretas,
+//            'totalPerguntas' => $totalPerguntas,
+//            'user' => $user,
+//        ]);
     }
 }
