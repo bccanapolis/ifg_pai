@@ -46,9 +46,6 @@ $this->registerJs($search);
                 ],
                 'filterInputOptions' => ['placeholder' => 'Questao', 'id' => 'grid--id_questao']
             ],
-        [
-            'class' => 'thtmorais\easyiigii\extensions\ActionColumn',
-        ],
     ]; 
     ?>
     <?= GridView::widget([

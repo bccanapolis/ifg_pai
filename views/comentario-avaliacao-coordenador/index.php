@@ -36,9 +36,6 @@ $this->registerJs($search);
         'texto:ntext',
         'ano',
         'semestre',
-//        [
-//            'class' => 'thtmorais\easyiigii\extensions\ActionColumn',
-//        ],
     ]; 
     ?>
     <?= GridView::widget([

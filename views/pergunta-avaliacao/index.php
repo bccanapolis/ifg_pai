@@ -27,9 +27,6 @@ $this->registerJs($search);
         ['class' => 'yii\grid\SerialColumn'],
         ['attribute' => 'id', 'visible' => false],
         'enunciado:ntext',
-        [
-            'class' => 'thtmorais\easyiigii\extensions\ActionColumn',
-        ],
     ];
     ?>
     <?= GridView::widget([

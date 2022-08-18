@@ -61,9 +61,6 @@ $this->registerJs($search);
                 ],
                 'filterInputOptions' => ['placeholder' => 'Aluno', 'id' => 'grid--id_aluno']
             ],
-        [
-            'class' => 'thtmorais\easyiigii\extensions\ActionColumn',
-        ],
     ]; 
     ?>
     <?= GridView::widget([

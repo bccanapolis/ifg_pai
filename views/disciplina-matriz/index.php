@@ -30,9 +30,6 @@ $this->registerJs($search);
         ['attribute' => 'id', 'visible' => false, ],
         'nome:ntext',
         'sigla:ntext',
-        [
-            'class' => 'thtmorais\easyiigii\extensions\ActionColumn',
-        ],
     ]; 
     ?>
     <?= GridView::widget([

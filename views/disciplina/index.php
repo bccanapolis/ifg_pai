@@ -50,9 +50,6 @@ $this->registerJs($search);
                 "groupEvenCssClass" => 'text-primary',
                 "groupOddCssClass" => 'text-primary',
             ],
-        [
-            'class' => 'thtmorais\easyiigii\extensions\ActionColumn',
-        ],
     ]; 
     ?>
     <?= GridView::widget([

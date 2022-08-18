@@ -61,9 +61,6 @@ $this->registerJs($search);
                 ],
                 'filterInputOptions' => ['placeholder' => 'Alternativa', 'id' => 'grid--id_alternativa']
             ],
-        [
-            'class' => 'thtmorais\easyiigii\extensions\ActionColumn',
-        ],
     ]; 
     ?>
     <?= GridView::widget([

@@ -62,9 +62,6 @@ $this->registerJs($search);
                 ],
                 'filterInputOptions' => ['placeholder' => 'Pergunta avaliacao', 'id' => 'grid--id_pergunta_avaliacao']
             ],
-        [
-            'class' => 'thtmorais\easyiigii\extensions\ActionColumn',
-        ],
     ]; 
     ?>
     <?= GridView::widget([

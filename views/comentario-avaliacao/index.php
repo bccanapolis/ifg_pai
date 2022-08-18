@@ -52,9 +52,6 @@ $this->registerJs($search);
             ],
             'filterInputOptions' => ['placeholder' => 'Disciplina', 'id' => 'grid--id_disciplina']
         ],
-//        [
-//            'class' => 'thtmorais\easyiigii\extensions\ActionColumn',
-//        ],
         'ano',
         'semestre'
     ];

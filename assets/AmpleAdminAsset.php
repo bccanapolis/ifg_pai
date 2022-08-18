@@ -21,27 +21,30 @@ class AmpleAdminAsset extends AssetBundle
     public $baseUrl = '@web';
 
     public $css = [
-        'ampleadmin/css/sidebar-nav.min.css',
-        'ampleadmin/css/jquery.toast.css',
-        'ampleadmin/css/morris.css',
-        'ampleadmin/css/animate.css',
-        'ampleadmin/css/style.css',
-        'ampleadmin/css/default.css',
-        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css',
-        'apexcharts/apexcharts.css',
-        'css/main.css'
+        'ampleadmin/libs/apexcharts/dist/apexcharts.css',
+        'ampleadmin/libs/fullcalendar/dist/fullcalendar.min.css',
+        'ampleadmin/extra-libs/calendar/calendar.css',
+        'ampleadmin/css/style.min.css',
     ];
 
     public $js = [
-        'ampleadmin/js/sidebar-nav.min.js',
-        'ampleadmin/js/jquery.slimscroll.js',
+        'ampleadmin/libs/jquery/dist/jquery.min.js',
+        'ampleadmin/extra-libs/taskboard/js/jquery-ui.min.js',
+        'ampleadmin/libs/bootstrap/dist/js/bootstrap.bundle.min.js',
+        'ampleadmin/js/app.min.js',
+        'ampleadmin/js/app.init.sidebar.js',
+        'ampleadmin/js/app-style-switcher.js',
+        'ampleadmin/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js',
+        'ampleadmin/extra-libs/sparkline/sparkline.js',
         'ampleadmin/js/waves.js',
-        'ampleadmin/js/jquery.waypoints.js',
-        'ampleadmin/js/jquery.counterup.min.js',
-        'ampleadmin/js/jquery.sparkline.min.js',
+        'ampleadmin/js/sidebarmenu.js',
+        'ampleadmin/js/feather.min.js',
         'ampleadmin/js/custom.min.js',
-        'ampleadmin/js/dashboard1.js',
-        'apexcharts/apexcharts.js',
+        'ampleadmin/libs/apexcharts/dist/apexcharts.min.js',
+        'ampleadmin/js/pages/dashboards/dashboard1.js',
+        'ampleadmin/libs/moment/min/moment.min.js',
+        'ampleadmin/libs/fullcalendar/dist/fullcalendar.min.js',
+        'ampleadmin/js/pages/calendar/cal-init.js'
     ];
 
     public $depends = [

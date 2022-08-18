@@ -43,17 +43,7 @@ $this->registerJs($search);
                 'pluginOptions' => ['allowClear' => true],
             ],
             'filterInputOptions' => ['placeholder' => 'Disciplina', 'id' => 'grid--id_disciplina']
-        ],
-        [
-            'class' => 'thtmorais\easyiigii\extensions\ActionColumn',
-            'buttons'=>[
-                'update' => function ($url, $model) {
-                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['questao/update2'], [
-                        'title' => Yii::t('yii', 'Update'),
-                    ]);
-                }
-            ]
-        ],
+        ]
     ];
     ?>
     <?= GridView::widget([

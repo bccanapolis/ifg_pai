@@ -21,14 +21,14 @@
   "require": {
     "php": ">=5.6.0",
     "yiisoft/yii2": "dev-master",
-    "yiisoft/yii2-bootstrap4": "~2.0.0",
     "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
     "kartik-v/yii2-widgets": "dev-master",
     "dektrium/yii2-user": "^0.9.14",
     "trandat1001/yii2-simplesamlphp": "dev-master",
+    "webvimark/module-user-management": "^1",
+    "kartik-v/yii2-grid": "dev-master",
     "lavrentiev/yii2-toastr": "dev-master",
-    "phpoffice/phpspreadsheet": "^1.18",
-    "webvimark/module-user-management": "^1"
+    "yiisoft/yii2-bootstrap4": "*"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.1.0",

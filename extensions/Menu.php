@@ -2,14 +2,16 @@
 
 namespace app\extensions;
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 class Menu extends \yii\widgets\Menu
 {
     /**
      * @inheritdoc
      */
-    public $labelTemplate = '{label}';
+    public $labelTemplate = '<span class="hide-menu">{label}</span>';
 
     /**
      * @inheritdoc
@@ -20,12 +22,12 @@ class Menu extends \yii\widgets\Menu
      *
      */
 
-    public $linkTemplate = '<a href="{url}" class="waves-effect">{icon}{label}</a>';
+    public $linkTemplate = '<a href="{url}" class="waves-effect waves-dark sidebar-link">{icon}{label}</a>';
 
     /**
      * @inheritdoc
      */
-    public $submenuTemplate = "\n<ul class=\"nav\" id=\"side-menu\">\n{items}\n</ul>\n";
+    public $submenuTemplate = "\n<ul class=\"nav\" id=\"sidebarnav\">\n{items}\n</ul>\n";
 
     /**
      * @inheritdoc
@@ -37,9 +39,41 @@ class Menu extends \yii\widgets\Menu
      */
     public function init()
     {
-        Html::addCssClass($this->options, 'nav');
-        $this->options['id'] = 'side-menu';
+        Html::addCssClass($this->options, '');
+        $this->options['id'] = 'sidebarnav';
         parent::init();
+    }
+
+    protected function renderItems($items)
+    {
+        $n = count($items);
+        $lines = [];
+        foreach ($items as $i => $item) {
+            $options = array_merge($this->itemOptions, ArrayHelper::getValue($item, 'options', ['class'=>'sidebar-item']));
+            $tag = ArrayHelper::remove($options, 'tag', 'li');
+            $class = [];
+            if ($item['active']) {
+                $class[] = $this->activeCssClass;
+            }
+            if ($i === 0 && $this->firstItemCssClass !== null) {
+                $class[] = $this->firstItemCssClass;
+            }
+            if ($i === $n - 1 && $this->lastItemCssClass !== null) {
+                $class[] = $this->lastItemCssClass;
+            }
+            Html::addCssClass($options, $class);
+
+            $menu = $this->renderItem($item);
+            if (!empty($item['items'])) {
+                $submenuTemplate = ArrayHelper::getValue($item, 'submenuTemplate', $this->submenuTemplate);
+                $menu .= strtr($submenuTemplate, [
+                    '{items}' => $this->renderItems($item['items']),
+                ]);
+            }
+            $lines[] = Html::tag($tag, $menu, $options);
+        }
+
+        return implode("\n", $lines);
     }
 
     /**
@@ -47,19 +81,41 @@ class Menu extends \yii\widgets\Menu
      */
     protected function renderItem($item)
     {
-        if (empty($item['url']))
-            $item['url'] = "javascript:void(0);";
+//        if (empty($item['url']))
+//            $item['url'] = "javascript:void(0);";
+//
+//
+//        $renderedItem = parent::renderItem($item);
+//        $badgeOptions = null;
+//        return strtr(
+//            $renderedItem,
+//            [
+//                '{icon}' => isset($item['icon'])
+//                    ? "<i class='fa {$item["icon"]}' aria-hidden='true'></i>"
+//                    : '',
+//            ]
+//        );
 
+        if (isset($item['url'])) {
+            $template = ArrayHelper::getValue($item, 'template', $this->linkTemplate);
 
-        $renderedItem = parent::renderItem($item);
-        $badgeOptions = null;
-        return strtr(
-            $renderedItem,
-            [
+            return strtr($template, [
+                '{url}' => Html::encode(Url::to($item['url'])),
                 '{icon}' => isset($item['icon'])
                     ? "<i class='fa {$item["icon"]}' aria-hidden='true'></i>"
                     : '',
-            ]
-        );
+                '{label}' => $item['label'],
+            ]);
+        }
+
+        $template = ArrayHelper::getValue($item, 'template', $this->labelTemplate);
+
+        return strtr($template, [
+            '{icon}' => isset($item['icon'])
+                    ? "<i class='fa {$item["icon"]}' aria-hidden='true'></i>"
+                    : '',
+            '{label}' => $item['label'],
+
+        ]);
     }
 }
