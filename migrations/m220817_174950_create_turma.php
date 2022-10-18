@@ -14,7 +14,6 @@ class m220817_174950_create_turma extends Migration
     {
         $this->createTable('{{%turma}}', [
             'id' => $this->primaryKey(),
-            'nome' => $this->string()->notNull(),
             'semestre' => $this->smallInteger('2'),
             'ano' => $this->smallInteger('4'),
             'professor_id' => $this->integer()->notNull(),

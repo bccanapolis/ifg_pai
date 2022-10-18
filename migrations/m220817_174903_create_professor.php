@@ -12,7 +12,7 @@ class m220817_174903_create_professor extends Migration
         $this->createTable('{{%professor}}', [
             'id' => $this->primaryKey(),
             'siape' => $this->string()->notNull(),
-            'primeiro_nome' => $this->string()->notNull(),
+            'primeiro_nome' => $this->string(),
             'ultimo_nome' => $this->string(),
             'tipo' => $this->integer()->notNull()->defaultValue(1),
             'user_id' => $this->integer(),

@@ -14,7 +14,7 @@ class m220817_174954_create_aluno extends Migration
     {
         $this->createTable('{{%aluno}}', [
             'id' => $this->primaryKey(),
-            'primeiro_nome' => $this->string()->notNull(),
+            'primeiro_nome' => $this->string(),
             'ultimo_nome' => $this->string(),
             'matricula' => $this->string()->notNull(),
             'cpf' => $this->string(),

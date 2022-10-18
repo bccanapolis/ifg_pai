@@ -14,8 +14,8 @@ class m220817_174914_create_curso extends Migration
     {
         $this->createTable('{{%curso}}', [
             'id' => $this->primaryKey(),
-            'nome' => $this->string()->notNull(),
-            'campus' => $this->string()->notNull(),
+            'nome' => $this->string(),
+            'campus' => $this->string(),
             'daa' => $this->integer()->notNull(),
         ]);
     }
