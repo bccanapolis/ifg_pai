@@ -1,4 +1,4 @@
-version: '3.5'
+version: '3.3'
 
 services:
   db:
@@ -27,6 +27,8 @@ services:
     volumes:
       - pai_database:/var/lib/postgresql/data
       - ./initdb:/docker-entrypoint-initdb.d
+    networks:
+      - default
   app:
     container_name: pai_app
     image: dmstr/php-yii2:7.4-fpm-8.0-nginx
@@ -35,16 +37,20 @@ services:
       - .env
     volumes:
       - ./:/app
+      - ./nginx:/etc/nginx/conf.d
     tmpfs:
       - /app/web/assets
       - /app/runtime
-    ports:
-      - "8090:80"
-      - "8091:443"
+    # ports:
+    #   - "8090:80"
+    #   - "8091:443"
     command: bash -c "chmod 777 /app/web/assets && chmod 777 /app/runtime && composer install && php ./yii migrate --interactive=0 && export XDEBUG_CONFIG=\"remote_connect_back=0 remote_enable=1 remote_host=172.17.0.1\" && supervisord -c  /etc/supervisor/supervisord.conf"
     depends_on:
       db:
         condition: service_healthy
+    networks:
+      - nginx-proxy
+      - default
     environment:
       PHP_ENABLE_XDEBUG: 0
       VIRTUAL_HOST: pai.bcc.anapolis.ifg.edu.br
@@ -53,4 +59,8 @@ services:
 
 volumes:
   pai_database:
+    external: true
+
+networks:
+  nginx-proxy:
     external: true
