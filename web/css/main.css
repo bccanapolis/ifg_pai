@@ -1,137 +1,3 @@
-/** LOADER GRAFICOS **/
-
-.loading {
-    width: 20px;
-    height: 20px;
-    transform: rotate(45deg);
-    animation: loading-ani1 4s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
-}
-.loading i {
-    width: 20px;
-    height: 20px;
-    display: inline-block;
-    border-radius: 0.3rem;
-    position: absolute;
-}
-.loading i:nth-child(1) {
-    background: #00e396;
-    transform: translate(0, 0);
-    animation: loading-ani2 4s ease-in-out infinite;
-}
-.loading i:nth-child(2) {
-    background: #ff4560;
-    transform: rotate(90deg) translate(0, 0);
-    animation: loading-ani3 6s ease-in-out infinite;
-}
-.loading i:nth-child(3) {
-    background: #ffca28;
-    transform: rotate(180deg) translate(0, 0);
-    animation: loading-ani4 8s ease-in-out infinite;
-}
-.loading i:nth-child(4) {
-    background: #008ffb;
-    transform: rotate(270deg) translate(0, 0);
-    animation: loading-ani5 10s ease-in-out infinite;
-}
-@keyframes loading-ani1 {
-    25% {
-        transform: rotate(135deg);
-    }
-    50% {
-        transform: rotate(225deg);
-    }
-    75% {
-        transform: rotate(315deg);
-    }
-    100% {
-        transform: rotate(405deg);
-    }
-}
-@keyframes loading-ani2 {
-    17.5%,
-    25%,
-    42.5%,
-    50%,
-    67.5%,
-    75%,
-    92.5%,
-    100% {
-        transform: translate(0, 0);
-    }
-    12.5%,
-    37.5%,
-    62.5%,
-    87.5% {
-        transform: translate(0, 40px);
-    }
-}
-@keyframes loading-ani3 {
-    17.5%,
-    25%,
-    42.5%,
-    50%,
-    67.5%,
-    75%,
-    92.5%,
-    100% {
-        transform: rotate(90deg) translate(0, 0);
-    }
-    12.5%,
-    37.5%,
-    62.5%,
-    87.5% {
-        transform: rotate(90deg) translate(0, 40px);
-    }
-}
-@keyframes loading-ani4 {
-    17.5%,
-    25%,
-    42.5%,
-    50%,
-    67.5%,
-    75%,
-    92.5%,
-    100% {
-        transform: rotate(180deg) translate(0, 0);
-    }
-    12.5%,
-    37.5%,
-    62.5%,
-    87.5% {
-        transform: rotate(180deg) translate(0, 40px);
-    }
-}
-@keyframes loading-ani5 {
-    17.5%,
-    25%,
-    42.5%,
-    50%,
-    67.5%,
-    75%,
-    92.5%,
-    100% {
-        transform: rotate(270deg) translate(0, 0);
-    }
-    12.5%,
-    37.5%,
-    62.5%,
-    87.5% {
-        transform: rotate(270deg) translate(0, 40px);
-    }
-}
-
-.container-loader {
-    height: 360px;
-    transform: translate(50%, 50%);
-    opacity: 0;
-    transition: opacity 0.8s;
-}
-
-.container-chart {
-    opacity: 0;
-    transition: opacity 0.8s;
-}
-
 .switch {
     position: relative;
     display: inline-block;
@@ -156,6 +22,7 @@
     left: 0;
     right: 0;
     bottom: 0;
+    height: 20px;
     background-color: #ccc;
     -webkit-transition: .4s;
     transition: .4s;
@@ -166,7 +33,7 @@
     content: "";
     height: 16px;
     width: 16px;
-    left: 4px;
+    left: 2px;
     bottom: 2px;
     background-color: white;
     -webkit-transition: .4s;
@@ -185,13 +52,4 @@ input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-    border-radius: 34px;
-}
-
-.slider.round:before {
-    border-radius: 50%;
 }

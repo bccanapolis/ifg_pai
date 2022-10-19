@@ -14,14 +14,16 @@ $search = "$('.search-button').click(function(){
 });";
 $this->registerJs($search);
 ?>
-<div class="avaliacao-index">
+<div class="card">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <div class="row bg-white">
-        <div class="col-sm-12 p-2">
-            <h3><a href="<?= Url::to(['grafico/professor']) ?>">Gráfico dos Professores</a></h3>
-            <h3><a href="<?= Url::to(['grafico/coordenador']) ?>">Gráfico do Coordenador</a></h3>
-            <h3><a href="<?= Url::to(['grafico/add']) ?>">Gráfico ADD</a></h3>
+    <div class="row no-gutters">
+        <div class="col-sm-12">
+            <div class="card-body">
+                <h3><a href="<?= Url::to(['grafico/professor']) ?>">Gráfico dos Professores</a></h3>
+<!--                <h3><a href="--><?//= Url::to(['grafico/coordenador']) ?><!--">Gráfico do Coordenador</a></h3>-->
+<!--                <h3><a href="--><?//= Url::to(['grafico/add']) ?><!--">Gráfico ADD</a></h3>-->
+            </div>
+
         </div>
     </div>
 </div>

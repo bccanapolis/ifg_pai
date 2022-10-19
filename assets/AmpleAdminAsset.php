@@ -25,6 +25,7 @@ class AmpleAdminAsset extends AssetBundle
         'ampleadmin/libs/fullcalendar/dist/fullcalendar.min.css',
         'ampleadmin/extra-libs/calendar/calendar.css',
         'ampleadmin/css/style.min.css',
+        'css/main.css',
     ];
 
     public $js = [
@@ -44,7 +45,7 @@ class AmpleAdminAsset extends AssetBundle
         'ampleadmin/js/pages/dashboards/dashboard1.js',
         'ampleadmin/libs/moment/min/moment.min.js',
         'ampleadmin/libs/fullcalendar/dist/fullcalendar.min.js',
-        'ampleadmin/js/pages/calendar/cal-init.js'
+        'ampleadmin/js/pages/calendar/cal-init.js',
     ];
 
     public $depends = [

@@ -13,78 +13,80 @@ $this->title = 'Gráfico Professor';
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
-<div class="avaliacao-index">
+<div class="card">
 
-    <div class="row bg-white" style="padding-bottom: 20px;">
-        <div class="col-sm-12 p-20">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group text-uppercase">
-                        <label for="select_professor">PROFESSOR</label>
-                        <select id="select_professor" class="form-control">
-                            <option value="0" change="atualizaGrafico()">TODOS</option>
-                            <?php foreach ($dataProvider as $professor) {
-                                echo '<option class="form-control text-uppercase" value="' . $professor['id'] . '">' . strtoupper($professor['nome']) . '</option>';
-                            } ?>
-                        </select>
+    <div class="row no-gutters">
+        <div class="col-sm-12">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group text-uppercase">
+                            <label for="select_professor">PROFESSOR</label>
+                            <select id="select_professor" class="form-control">
+                                <option value="0" change="atualizaGrafico()">TODOS</option>
+                                <?php foreach ($dataProvider as $professor) {
+                                    echo '<option class="form-control text-uppercase" value="' . $professor['id'] . '">' . strtoupper($professor['nome']) . '</option>';
+                                } ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 <?php
+                    $user = \app\models\User::find()->where(['id' => Yii::$app->user->id])->one();
+                    if (isset($user) && $user->aluno) {
+                        echo "hidden";
+                    }
+                    ?>">
+                        <div class="form-group">
+                            <label for="select_disciplina">DISCIPLINA</label>
+                            <select id="select_disciplina" change="atualizaGrafico()" disabled class="form-control">
+                                <option value="0">TODOS</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-sm-6 <?php
+                <div class="row <?php
                 $user = \app\models\User::find()->where(['id' => Yii::$app->user->id])->one();
                 if (isset($user) && $user->aluno) {
                     echo "hidden";
                 }
                 ?>">
-                    <div class="form-group">
-                        <label for="select_disciplina">DISCIPLINA</label>
-                        <select id="select_disciplina" change="atualizaGrafico()" disabled class="form-control">
-                            <option value="0">TODOS</option>
-                        </select>
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            <label for="select_question">PERGUNTA</label>
+                            <select id="select_question" change="atualizaGrafico()" disabled class="form-control">
+                                <option value="0">TODOS</option>
+                                <?php
+                                $perguntas = \app\models\QacProfessorPergunta::find()->all();
+                                foreach ($perguntas as &$value) {
+                                    echo '<option value="' . $value->id . '">' . $value->enunciado . '</option>';
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <p class="switch-text">REAL / RELATIVO</p>
+                            <label class="switch">
+                                <input id="switch_normalize" type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+
                     </div>
                 </div>
-            </div>
 
-            <div class="row <?php
-            $user = \app\models\User::find()->where(['id' => Yii::$app->user->id])->one();
-            if (isset($user) && $user->aluno) {
-                echo "hidden";
-            }
-            ?>">
-                <div class="col-sm-10">
-                    <div class="form-group">
-                        <label for="select_question">PERGUNTA</label>
-                        <select id="select_question" change="atualizaGrafico()" disabled class="form-control">
-                            <option value="0">TODOS</option>
-                            <?php
-                            $perguntas = \app\models\PerguntaAvaliacao::find()->all();
-                            foreach ($perguntas as &$value) {
-                                echo '<option value="' . $value->id . '">' . $value->enunciado . '</option>';
-                            }
-                            ?>
-                        </select>
+                <div class="form-group">
+                    <div id="professorchart" class="container-chart"></div>
+                    <div class="container-loader">
+                        <div class="loading"><i></i><i></i><i></i><i></i></div>
                     </div>
+                    <p id="description_disciplina" style="text-align: center; display: none;">Esse gráfico apresenta a
+                        distribuição da quantidade de avaliações ótimo, bom, regular, ruim e péssimo para todas as 10
+                        perguntas aplicadas.</p>
                 </div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <p class="switch-text">REAL / RELATIVO</p>
-                        <label class="switch">
-                            <input id="switch_normalize" type="checkbox" checked>
-                            <span class="slider round"></span>
-                        </label>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div id="professorchart" class="container-chart"></div>
-                <div class="container-loader">
-                    <div class="loading"><i></i><i></i><i></i><i></i></div>
-                </div>
-                <p id="description_disciplina" style="text-align: center; display: none;">Esse gráfico apresenta a
-                    distribuição da quantidade de avaliações ótimo, bom, regular, ruim e péssimo para todas as 10
-                    perguntas aplicadas.</p>
             </div>
         </div>
     </div>

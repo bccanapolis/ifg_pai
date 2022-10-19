@@ -8,9 +8,9 @@ use app\models\Disciplina;
 use app\models\DisciplinaMatriz;
 use app\models\PerguntaAvaliacaoCoordenador;
 use Yii;
-use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\helpers\Json;
+use yii\web\Controller;
 
 /**
  * DisciplinaController implements the CRUD actions for Disciplina model.
@@ -61,7 +61,13 @@ class GraficoController extends Controller
 //            if (isset($user) && $user->professor) {
 //                $res = $connection->createCommand('select distinct (professor.primeiro_nome || \' \' || professor.ultimo_nome) as nome, professor.id from avaliacao left join disciplina on avaliacao.id_disciplina = disciplina.id left join professor on disciplina.id_professor = professor.id where professor.user_id = :user_id', [':user_id' => $user->id])->queryAll();
 //            } else {
-            $res = $connection->createCommand("select distinct (professor.primeiro_nome || ' ' || case when professor.ultimo_nome > '' then professor.ultimo_nome else '' end ) as nome, professor.id from avaliacao left join disciplina on avaliacao.id_disciplina = disciplina.id left join professor on disciplina.id_professor = professor.id;")->queryAll();
+            $res = $connection->createCommand("select distinct (professor.primeiro_nome || ' ' ||
+                 case when professor.ultimo_nome > '' then professor.ultimo_nome else '' end) as nome,
+                professor.id
+from qac_professor
+         left join turma on qac_professor.turma_id = turma.id
+         left join disciplina on turma.disciplina_id = disciplina.id
+         left join professor on turma.professor_id = professor.id")->queryAll();
 //            }
 
             return $this->render('professor', [
@@ -70,53 +76,36 @@ class GraficoController extends Controller
         }
     }
 
-    private function alunosResponderamAvaliacaoProfessor(int $professor = null, int $disciplina = null)
-    {
-        $connection = Yii::$app->db;
-        $arr = [];
-        $sql = "select count(distinct avaliacao.id_aluno)             as alunos_responderam,
-       (disciplina.ano || '-' || disciplina.semestre) as ano_semestre
-from avaliacao
-         left join disciplina on avaliacao.id_disciplina = disciplina.id
-         left join professor on disciplina.id_professor = professor.id";
-
-        if (!is_null($professor)) {
-            $sql .= ' where professor.id = :professor';
-            $arr[':professor'] = $professor;
-        }
-        if (!is_null($disciplina)) {
-            $sql .= ' and disciplina.id_disciplina_matriz = :disciplina';
-            $arr[':disciplina'] = $disciplina;
-        }
-
-        $sql .= ' group by ano_semestre;';
-        $res = $connection->createCommand($sql)->bindValues($arr)->queryAll();
-        return $res;
-    }
-
     public function actionApiProfessor(int $professor = null, int $disciplina = null, int $pergunta = null)
     {
         $connection = Yii::$app->db;
         $arr = [];
         $sql = "select count(nota),
-       (case when nota = 0 then 'Péssimo' when nota = 1 then 'Ruim' when nota = 2 then 'Regular' when nota = 3 then 'Bom' when nota = 4 then 'Ótimo' end) as nota,
-       nota as ponto,
-       (disciplina.ano || '-' || disciplina.semestre) as ano_semestre
-        from avaliacao
-        left join disciplina on avaliacao.id_disciplina = disciplina.id
-        left join professor on disciplina.id_professor = professor.id
-        left join pergunta_avaliacao on avaliacao.id_pergunta_avaliacao = pergunta_avaliacao.id ";
+       (case
+            when nota = 0 then 'Péssimo'
+            when nota = 1 then 'Ruim'
+            when nota = 2 then 'Regular'
+            when nota = 3 then 'Bom'
+            when nota = 4 then 'Ótimo' end) as nota,
+       nota                                 as ponto,
+       (turma.ano || '-' || turma.semestre) as ano_semestre
+from qac_professor
+         left join turma on qac_professor.turma_id = turma.id
+
+         left join disciplina on turma.disciplina_id = disciplina.id
+         left join professor on turma.professor_id = professor.id
+         left join qac_professor_pergunta on qac_professor.pergunta_id = qac_professor_pergunta.id";
 
         if (!is_null($professor)) {
             $sql .= ' where professor.id = :professor';
             $arr[':professor'] = $professor;
         }
         if (!is_null($disciplina)) {
-            $sql .= ' and disciplina.id_disciplina_matriz = :disciplina';
+            $sql .= ' and disciplina.id = :disciplina';
             $arr[':disciplina'] = $disciplina;
         }
         if (!is_null($pergunta)) {
-            $sql .= ' and pergunta_avaliacao.id  = :pergunta';
+            $sql .= ' and qac_professor_pergunta.id  = :pergunta';
             $arr[':pergunta'] = $pergunta;
         }
         $sql .= ' group by nota, ano_semestre order by ponto desc;';
@@ -132,7 +121,7 @@ from avaliacao
         if (is_null($disciplina)) {
             $title = "TODOS";
         } else {
-            $title = DisciplinaMatriz::findOne(['id' => $disciplina])->nome;
+            $title = Disciplina::findOne(['id' => $disciplina])->nome;
         }
 
         $matriculados = $this->alunosResponderamAvaliacaoProfessor($professor, $disciplina);
@@ -145,6 +134,31 @@ from avaliacao
         $data_json = ['series' => $res, 'label' => $label, 'title' => $title, 'matriculated' => $obj_matriculados];
 
         return JSON::encode($data_json);
+    }
+
+    private function alunosResponderamAvaliacaoProfessor(int $professor = null, int $disciplina = null)
+    {
+        $connection = Yii::$app->db;
+        $arr = [];
+        $sql = "select count(distinct qac_professor.aluno_id)             as alunos_responderam,
+       (turma.ano || '-' || turma.semestre) as ano_semestre
+from qac_professor
+    left join turma on qac_professor.turma_id = turma.id
+         left join disciplina on turma.disciplina_id = disciplina.id
+         left join professor on turma.professor_id = professor.id";
+
+        if (!is_null($professor)) {
+            $sql .= ' where professor.id = :professor';
+            $arr[':professor'] = $professor;
+        }
+        if (!is_null($disciplina)) {
+            $sql .= ' and disciplina.id = :disciplina';
+            $arr[':disciplina'] = $disciplina;
+        }
+
+        $sql .= ' group by ano_semestre;';
+        $res = $connection->createCommand($sql)->bindValues($arr)->queryAll();
+        return $res;
     }
 
     public function actionCoordenador()
@@ -195,19 +209,6 @@ group by periodo;')->queryAll();
 
     }
 
-    private function alunosResponderamAvaliacaoCoordenador()
-    {
-        $connection = Yii::$app->db;
-        $arr = [];
-        $sql = "select count(distinct avaliacao_coordenador.id_aluno)             as alunos_responderam,
-       (ano || '-' || semestre)             as ano_semestre
-from avaliacao_coordenador
-group by ano_semestre;";
-        $res = $connection->createCommand($sql)->bindValues($arr)->queryAll();
-        return $res;
-    }
-
-
     public function actionApiCoordenador($pergunta = null)
     {
         $connection = Yii::$app->db;
@@ -238,11 +239,27 @@ group by ano_semestre;";
 
     }
 
+    private function alunosResponderamAvaliacaoCoordenador()
+    {
+        $connection = Yii::$app->db;
+        $arr = [];
+        $sql = "select count(distinct avaliacao_coordenador.id_aluno)             as alunos_responderam,
+       (ano || '-' || semestre)             as ano_semestre
+from avaliacao_coordenador
+group by ano_semestre;";
+        $res = $connection->createCommand($sql)->bindValues($arr)->queryAll();
+        return $res;
+    }
+
     public function actionDisciplina($professor = null)
     {
         $connection = Yii::$app->db;
         if (!is_null($professor)) {
-            $res = $connection->createCommand('select distinct disciplina_matriz.id, disciplina_matriz.nome from avaliacao left join disciplina on avaliacao.id_disciplina = disciplina.id left join disciplina_matriz on disciplina.id_disciplina_matriz = disciplina_matriz.id where disciplina.id_professor = :id_professor', [':id_professor' => $professor])->queryAll();
+            $res = $connection->createCommand('select distinct disciplina.id, disciplina.nome
+from qac_professor
+    left join turma on qac_professor.turma_id = turma.id
+         left join disciplina on turma.disciplina_id = disciplina.id
+where turma.professor_id = :id_professor', [':id_professor' => $professor])->queryAll();
             $data_json = ['disciplinas' => $res];
             return JSON::encode($data_json);
         }
@@ -252,7 +269,7 @@ group by ano_semestre;";
     public function actionPergunta()
     {
         $connection = Yii::$app->db;
-        $res = $connection->createCommand('select id, enunciado from pergunta_avaliacao')->queryAll();
+        $res = $connection->createCommand('select id, enunciado from qac_professor_pergunta')->queryAll();
         $data_json = ['perguntas' => $res];
         return JSON::encode($data_json);
     }
