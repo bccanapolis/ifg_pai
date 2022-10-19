@@ -1,11 +1,13 @@
 <?php
 
+use kartik\builder\Form;
+use kartik\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Professor */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form kartik\widgets\ActiveForm */
 ?>
 
 <div class="professor-form">
@@ -14,24 +16,20 @@ use yii\widgets\ActiveForm;
 
     <?= $form->errorSummary($model); ?>
 
-    <?= $form->field($model, 'id', ['template' => '{input}'])->textInput(['style' => 'display:none']); ?>
-
-    <?= $form->field($model, 'siape')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'primeiro_nome')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'ultimo_nome')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'tipo')->textInput() ?>
-
-    <?= $form->field($model, 'user_id')->widget(\kartik\widgets\Select2::classname(), [
-        'data' => \yii\helpers\ArrayHelper::map(\app\models\User::find()->orderBy(\app\models\User::representingColumn())->asArray()->all(), 'id', \app\models\User::representingColumn()),
-        'options' => ['placeholder' => 'Choose User'],
-        'pluginOptions' => [
-            'allowClear' => true
-        ],
-    ]); ?>
-
+    <?php
+    echo Form::widget([
+        'model' => $model,
+        'form' => $form,
+        'columns' => 12,
+        'attributes' => [
+            'primeiro_nome' => ['type' => Form::INPUT_TEXT, 'columnOptions' => ['colspan' => 12], 'options' => ['placeholder' => 'Enter Primeiro Nome...', 'maxlength' => 255]],
+            'ultimo_nome' => ['type' => Form::INPUT_TEXT, 'columnOptions' => ['colspan' => 12], 'options' => ['placeholder' => 'Enter Ultimo Nome...', 'maxlength' => 255]],
+            'siape' => ['type' => Form::INPUT_TEXT, 'columnOptions' => ['colspan' => 12], 'options' => ['placeholder' => 'Enter Matricula...', 'maxlength' => 255]],
+            'user_id' => ['type' => Form::INPUT_DROPDOWN_LIST, 'columnOptions' => ['colspan' => 12], 'items' => ArrayHelper::map(\app\models\User::find()->asArray()->orderBy(\app\models\User::representingColumn())->all(), 'id', \app\models\User::representingColumn()), 'options' => ['placeholder' => 'Usuário']],
+            'tipo' => ['type' => Form::INPUT_DROPDOWN_LIST, 'columnOptions' => ['colspan' => 12], 'items' => \app\models\Professor::$tipos, 'options' => ['placeholder' => 'Curso']],
+        ]
+    ]);
+    ?>
 
 
     <div class="form-group">

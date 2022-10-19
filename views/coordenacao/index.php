@@ -1,9 +1,85 @@
 <?php
-/* @var $this yii\web\View */
-?>
-<h1>coordenacao/index</h1>
 
-<p>
-    You may change the content of this page by modifying
-    the file <code><?= __FILE__; ?></code>.
-</p>
+/* @var $this yii\web\View */
+
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+use app\models\Professor;
+use kartik\export\ExportMenu;
+use kartik\grid\GridView;
+use yii\helpers\Html;
+
+$this->title = 'Coordenação';
+$this->params['breadcrumbs'][] = $this->title;
+$search = "$('.search-button').click(function(){
+	$('.search-form').toggle(1000);
+	return false;
+});";
+$this->registerJs($search);
+?>
+<div class="curso-index">
+
+    <div>
+        <?= Html::a('Adicionar ' . $this->title . ' <i class="fa fa-plus-circle"></i>', ['create'], ['class' => 'btn btn-success']) ?>
+    </div>
+    <br/>
+    <?php
+    $gridColumn = [
+        ['class' => 'yii\grid\SerialColumn'],
+        ['attribute' => 'id', 'visible' => false],
+        [
+            'attribute' => 'professor_id',
+            'value' => function ($model) {
+                if ($model->professor_id != NULL) {
+                    return $model->professor->{\app\models\Professor::representingColumn()};
+                } else {
+                    return NULL;
+                }
+            },
+            'contentOptions' => ['class' => 'text-center'],
+            'filterType' => GridView::FILTER_SELECT2,
+            'filter' => \yii\helpers\ArrayHelper::map(\app\models\Professor::find()->asArray()->orderBy(\app\models\Professor::representingColumn())->all(), 'id', \app\models\Professor::representingColumn()),
+            'filterWidgetOptions' => [
+                'pluginOptions' => ['allowClear' => true],
+            ],
+            'filterInputOptions' => ['placeholder' => 'Curso', 'id' => 'grid--curso_id'],
+            "groupEvenCssClass" => 'text-primary',
+            "groupOddCssClass" => 'text-primary',
+        ],
+        [
+            'attribute' => 'curso_id',
+            'value' => function ($model) {
+                if ($model->curso_id != NULL) {
+                    return $model->curso->{\app\models\Curso::representingColumn()};
+                } else {
+                    return NULL;
+                }
+            },
+            'contentOptions' => ['class' => 'text-center'],
+            'filterType' => GridView::FILTER_SELECT2,
+            'filter' => \yii\helpers\ArrayHelper::map(\app\models\Curso::find()->asArray()->orderBy(\app\models\Curso::representingColumn())->all(), 'id', \app\models\Curso::representingColumn()),
+            'filterWidgetOptions' => [
+                'pluginOptions' => ['allowClear' => true],
+            ],
+            'filterInputOptions' => ['placeholder' => 'Curso', 'id' => 'grid--curso_id'],
+            "groupEvenCssClass" => 'text-primary',
+            "groupOddCssClass" => 'text-primary',
+        ]
+    ];
+    ?>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => $gridColumn,
+        'pjax' => true,
+        'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-aluno']],
+        'panel' => [
+            'type' => GridView::TYPE_PRIMARY,
+            'heading' => '<span class="glyphicon glyphicon-book"></span>  ' . Html::encode($this->title),
+        ],
+        'summary' => '',
+        'export' => false,
+        'toolbar' => ['content' => '']
+
+    ]); ?>
+
+</div>

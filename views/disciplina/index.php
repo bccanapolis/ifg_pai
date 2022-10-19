@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
+
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 use yii\helpers\Html;
@@ -17,85 +18,51 @@ $this->registerJs($search);
 ?>
 <div class="disciplina-index">
 
-    <!--<h1><?= Html::encode($this->title) ?></h1>-->
-    <div class="text-right">
-        <?= Html::a('Criar Disciplina <i class="fa fa-plus-circle"></i>', ['create'], ['class' => 'btn btn-success']) ?>
+    <div>
+        <?= Html::a('Adicionar ' . $this->title . ' <i class="fa fa-plus-circle"></i>', ['create'], ['class' => 'btn btn-success']) ?>
     </div>
-    
-    <br />
+    <br/>
 
-<?php 
+    <?php
     $gridColumn = [
         ['class' => 'yii\grid\SerialColumn'],
-        ['attribute' => 'id', 'visible' => false, ],
+        ['attribute' => 'id', 'visible' => false,],
         'nome:ntext',
-        'ano',
-        'semestre',
+        'codigo',
         [
-                'attribute' => 'id_professor',
-                'value' => function($model){
-                    if($model->id_professor!=NULL){
-                        return $model->professor->{\app\models\Professor::representingColumn()};
-                    }else{
-                        return NULL;
-                    }
-                },
-                'contentOptions' => ['class' => 'text-center'],
-                'filterType' => GridView::FILTER_SELECT2,
-                'filter' => \yii\helpers\ArrayHelper::map(\app\models\Professor::find()->asArray()->orderBy(\app\models\Professor::representingColumn())->all(), 'id', \app\models\Professor::representingColumn()),
-                'filterWidgetOptions' => [
-                    'pluginOptions' => ['allowClear' => true],
-                ],
-                'filterInputOptions' => ['placeholder' => 'Professor', 'id' => 'grid--id_professor'],
-                "groupEvenCssClass" => 'text-primary',
-                "groupOddCssClass" => 'text-primary',
+            'attribute' => 'curso_id',
+            'value' => function ($model) {
+                if ($model->curso_id != NULL) {
+                    return $model->curso->{\app\models\Curso::representingColumn()};
+                } else {
+                    return NULL;
+                }
+            },
+            'contentOptions' => ['class' => 'text-center'],
+            'filterType' => GridView::FILTER_SELECT2,
+            'filter' => \yii\helpers\ArrayHelper::map(\app\models\Curso::find()->asArray()->orderBy(\app\models\Curso::representingColumn())->all(), 'id', \app\models\Curso::representingColumn()),
+            'filterWidgetOptions' => [
+                'pluginOptions' => ['allowClear' => true],
             ],
-    ]; 
+            'filterInputOptions' => ['placeholder' => 'Curso', 'id' => 'grid--curso_id'],
+            "groupEvenCssClass" => 'text-primary',
+            "groupOddCssClass" => 'text-primary',
+        ],
+    ];
     ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => $gridColumn,
         'pjax' => true,
-        'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-disciplina']],
+        'pjaxSettings' => ['options' => ['id' => 'kv-pjax-container-aluno']],
         'panel' => [
-            'type' => GridView::TYPE_INFO,
+            'type' => GridView::TYPE_PRIMARY,
             'heading' => '<span class="glyphicon glyphicon-book"></span>  ' . Html::encode($this->title),
-            'headingOptions'=>[
-                'class' => 'bg-dark',
-            ]
         ],
-        'summary' => '',
+        'summary' => 'Bla Bla',
         'export' => false,
         // your toolbar can include the additional full export menu
-        'toolbar' => [
-            'content'=>
-                Html::button('<i class="glyphicon glyphicon-plus"></i>', [
-                    'type'=>'button', 
-                    'title'=>'Add Book', 
-                    'class'=>'btn btn-success'
-                ]) . ' '.
-                Html::a('<i class="glyphicon glyphicon-repeat"></i>', ['grid-demo'], [
-                    'class' => 'btn btn-default', 
-                    'title' => 'Reset Grid'
-                ]),
-            '{export}',
-            ExportMenu::widget([
-                'dataProvider' => $dataProvider,
-                'columns' => $gridColumn,
-                'target' => ExportMenu::TARGET_BLANK,
-                'fontAwesome' => true,
-                'dropdownOptions' => [
-                    'label' => 'Full',
-                    'class' => 'btn btn-default',
-                    'itemsBefore' => [
-                        '<li class="dropdown-header">Export All Data</li>',
-                    ],
-                ],
-                'exportConfig' => [
-                    ExportMenu::FORMAT_PDF => false
-                ]
-            ]) ,
-        ],
+        'toolbar' => ['content' => '']
     ]); ?>
 
 </div>

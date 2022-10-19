@@ -69,7 +69,6 @@ class DisciplinaController extends Controller
         $model = new Disciplina();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->nome = $model->disciplinaMatriz->nome;
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }

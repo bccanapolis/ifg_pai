@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); 
 ?>
 
-<?php    $query = app\models\Disciplina::find()->where(['id_professor'=> $model->id])->indexBy('id_professor');
+<?php    $query = app\models\Turma::find()->where(['professor_id'=> $model->id])->indexBy('id_professor');
     $dataProvider = new yii\data\ActiveDataProvider([
         'query' => $query,
     ]);

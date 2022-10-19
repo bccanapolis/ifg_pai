@@ -14,11 +14,10 @@ class m221017_234201_create_qac_coordenador_pergunta extends Migration
     {
         $this->createTable('{{%qac_coordenador_pergunta}}', [
             'id' => $this->primaryKey(),
-            'enunciado' => $this->text(),
-            'curso_id' => $this->integer()->notNull()
+            'enunciado' => $this->text()
         ]);
 
-        $this->addForeignKey('qac_coordenador_pergunta_curso_id','qac_coordenador_pergunta','curso_id','curso','id');
+//        $this->addForeignKey('qac_coordenador_pergunta_curso_id','qac_coordenador_pergunta','curso_id','curso','id');
     }
 
     /**

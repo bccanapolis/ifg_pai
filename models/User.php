@@ -58,15 +58,15 @@ class User extends \webvimark\modules\UserManagement\models\User
         ];
     }
 
-//    /**
-//     * @return \yii\db\ActiveQuery
-//     */
-//    public function getAluno()
-//    {
-//        return $this->hasOne(\app\models\Aluno::className(), ['user_id' => 'id']);
-//    }
-//    public function getProfessor()
-//    {
-//        return $this->hasOne(\app\models\Professor::className(), ['user_id' => 'id']);
-//    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAluno()
+    {
+        return $this->hasOne(\app\models\Aluno::className(), ['user_id' => 'id']);
+    }
+    public function getProfessor()
+    {
+        return $this->hasOne(\app\models\Professor::className(), ['user_id' => 'id']);
+    }
 }

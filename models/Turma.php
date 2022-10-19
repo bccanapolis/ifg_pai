@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "turma".
  *
@@ -30,16 +28,20 @@ class Turma extends \yii\db\ActiveRecord
         return 'turma';
     }
 
+    public static function representingColumn()
+    {
+        return 'id';
+    }
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['nome', 'professor_id', 'disciplina_id', 'coordenacao_id'], 'required'],
+            [['professor_id', 'disciplina_id', 'coordenacao_id'], 'required'],
             [['semestre', 'ano', 'professor_id', 'disciplina_id', 'coordenacao_id'], 'default', 'value' => null],
             [['semestre', 'ano', 'professor_id', 'disciplina_id', 'coordenacao_id'], 'integer'],
-            [['nome'], 'string', 'max' => 255],
             [['coordenacao_id'], 'exist', 'skipOnError' => true, 'targetClass' => Coordenacao::className(), 'targetAttribute' => ['coordenacao_id' => 'id']],
             [['disciplina_id'], 'exist', 'skipOnError' => true, 'targetClass' => Disciplina::className(), 'targetAttribute' => ['disciplina_id' => 'id']],
             [['professor_id'], 'exist', 'skipOnError' => true, 'targetClass' => Professor::className(), 'targetAttribute' => ['professor_id' => 'id']],
@@ -53,7 +55,6 @@ class Turma extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'nome' => 'Nome',
             'semestre' => 'Semestre',
             'ano' => 'Ano',
             'professor_id' => 'Professor ID',

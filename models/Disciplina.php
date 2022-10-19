@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "disciplina".
  *
@@ -23,6 +21,11 @@ class Disciplina extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'disciplina';
+    }
+
+    public static function representingColumn()
+    {
+        return 'nome';
     }
 
     /**

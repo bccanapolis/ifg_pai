@@ -1,9 +1,21 @@
 <?php
-/* @var $this yii\web\View */
-?>
-<h1>qac-professor/update</h1>
 
-<p>
-    You may change the content of this page by modifying
-    the file <code><?= __FILE__; ?></code>.
-</p>
+use yii\helpers\Html;
+
+/* @var $this yii\web\View */
+/* @var $model app\models\Curso */
+
+$this->title = 'Update QAC Coordenador Comentário: ' . ' ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'QAC Coordenador Comentário', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = 'Update';
+?>
+<div class="curso-update">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+
+    <?= $this->render('_form', [
+        'model' => $model,
+    ]) ?>
+
+</div>

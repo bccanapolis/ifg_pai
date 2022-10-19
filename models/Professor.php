@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "professor".
  *
@@ -20,12 +18,23 @@ use Yii;
  */
 class Professor extends \yii\db\ActiveRecord
 {
+    public static array $tipos = [
+        1 => 'Professor',
+        2 => 'Coordenador',
+        3 => 'Diretor',
+    ];
+
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
         return 'professor';
+    }
+
+    public static function representingColumn()
+    {
+        return 'primeiro_nome';
     }
 
     /**
@@ -41,6 +50,7 @@ class Professor extends \yii\db\ActiveRecord
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
+
 
     /**
      * {@inheritdoc}

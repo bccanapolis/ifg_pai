@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "coordenacao".
  *
@@ -23,6 +21,11 @@ class Coordenacao extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'coordenacao';
+    }
+
+    public static function representingColumn()
+    {
+        return 'professor_id';
     }
 
     /**

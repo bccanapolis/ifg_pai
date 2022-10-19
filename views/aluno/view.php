@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); 
 ?>
 
-<?php    $query = app\models\AlunoDisciplina::find()->where(['id_aluno'=> $model->id])->indexBy('id_aluno');
+<?php    $query = app\models\TurmaAluno::find()->where(['aluno_id'=> $model->id])->indexBy('aluno_id');
     $dataProvider = new yii\data\ActiveDataProvider([
         'query' => $query,
     ]);
@@ -88,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     kartik\widgets\ActiveForm::end();
 
-    $query = app\models\Avaliacao::find()->where(['id_aluno'=> $model->id])->indexBy('id_aluno');
+    $query = app\models\QacProfessor::find()->where(['aluno_id'=> $model->id])->indexBy('aluno_id');
     $dataProvider = new yii\data\ActiveDataProvider([
         'query' => $query,
     ]);
@@ -138,50 +138,50 @@ $this->params['breadcrumbs'][] = $this->title;
 
     kartik\widgets\ActiveForm::end();
 
-    $query = app\models\Resposta::find()->where(['id_aluno'=> $model->id])->indexBy('id_aluno');
-    $dataProvider = new yii\data\ActiveDataProvider([
-        'query' => $query,
-    ]);
-
-    $form = kartik\widgets\ActiveForm::begin(['action'=>Url::to(['resposta/batchupdate','id'=>$model->id,'return'=>'aluno'])]);
-
-    echo kartik\builder\TabularForm::widget([
-        'dataProvider'=>$dataProvider,
-        'form'=>$form,
-        'checkboxColumn'=>false,
-        'actionColumn'=>false,
-        'attributes'=>[
-            'id'=>[
-            'type'=>kartik\builder\TabularForm::INPUT_STATIC,
-            'label'=>'id',
-            'columnOptions'=>['hAlign'=>GridView::ALIGN_RIGHT, 'width'=>'90px']
-            ],
-            'id_aluno'=>[
-            'type'=>kartik\builder\TabularForm::INPUT_STATIC,
-            'label'=>'id_aluno',
-            'columnOptions'=>['hAlign'=>GridView::ALIGN_RIGHT, 'width'=>'90px']
-            ],
-            'id_questao'=>[
-            'type'=>kartik\builder\TabularForm::INPUT_STATIC,
-            'label'=>'id_questao',
-            'columnOptions'=>['hAlign'=>GridView::ALIGN_RIGHT, 'width'=>'90px']
-            ],
-            'id_alternativa'=>[
-            'type'=>kartik\builder\TabularForm::INPUT_STATIC,
-            'label'=>'id_alternativa',
-            'columnOptions'=>['hAlign'=>GridView::ALIGN_RIGHT, 'width'=>'90px']
-            ],
-        ],
-        'gridSettings'=>[
-            'floatHeader'=>true,
-            'panel'=>[
-                'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-book"></i>Resposta</h3>',
-                'type' => GridView::TYPE_PRIMARY,
-            ]
-        ]
-    ]);
-
-    kartik\widgets\ActiveForm::end();
+//    $query = app\models\Resposta::find()->where(['id_aluno'=> $model->id])->indexBy('id_aluno');
+//    $dataProvider = new yii\data\ActiveDataProvider([
+//        'query' => $query,
+//    ]);
+//
+//    $form = kartik\widgets\ActiveForm::begin(['action'=>Url::to(['resposta/batchupdate','id'=>$model->id,'return'=>'aluno'])]);
+//
+//    echo kartik\builder\TabularForm::widget([
+//        'dataProvider'=>$dataProvider,
+//        'form'=>$form,
+//        'checkboxColumn'=>false,
+//        'actionColumn'=>false,
+//        'attributes'=>[
+//            'id'=>[
+//            'type'=>kartik\builder\TabularForm::INPUT_STATIC,
+//            'label'=>'id',
+//            'columnOptions'=>['hAlign'=>GridView::ALIGN_RIGHT, 'width'=>'90px']
+//            ],
+//            'id_aluno'=>[
+//            'type'=>kartik\builder\TabularForm::INPUT_STATIC,
+//            'label'=>'id_aluno',
+//            'columnOptions'=>['hAlign'=>GridView::ALIGN_RIGHT, 'width'=>'90px']
+//            ],
+//            'id_questao'=>[
+//            'type'=>kartik\builder\TabularForm::INPUT_STATIC,
+//            'label'=>'id_questao',
+//            'columnOptions'=>['hAlign'=>GridView::ALIGN_RIGHT, 'width'=>'90px']
+//            ],
+//            'id_alternativa'=>[
+//            'type'=>kartik\builder\TabularForm::INPUT_STATIC,
+//            'label'=>'id_alternativa',
+//            'columnOptions'=>['hAlign'=>GridView::ALIGN_RIGHT, 'width'=>'90px']
+//            ],
+//        ],
+//        'gridSettings'=>[
+//            'floatHeader'=>true,
+//            'panel'=>[
+//                'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-book"></i>Resposta</h3>',
+//                'type' => GridView::TYPE_PRIMARY,
+//            ]
+//        ]
+//    ]);
+//
+//    kartik\widgets\ActiveForm::end();
 
 ?>
     </div>

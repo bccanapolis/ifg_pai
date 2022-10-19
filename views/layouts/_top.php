@@ -1,6 +1,6 @@
 <?php
 
-?>
+use yii\helpers\Url; ?>
 
 <header class="topbar">
     <nav class="navbar top-navbar navbar-expand-md navbar-dark">
@@ -355,7 +355,7 @@
                         <!--                            class="rounded-circle"-->
                         <!--                            width="36"-->
                         <!--                        />-->
-                        <span class="ms-2 font-weight-medium">Steve</span
+                        <span class="ms-2 font-weight-medium"><?= Yii::$app->user->username ?></span
                         ><span class="fas fa-angle-down ms-2"></span>
                     </a>
                     <div
@@ -420,7 +420,7 @@
                             Account Setting</a
                         >
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#"
+                        <a class="dropdown-item" href="<?= Url::to(['user-management/auth/logout']) ?>"
                         ><i
                                     data-feather="log-out"
                                     class="feather-sm text-danger me-1 ms-1"

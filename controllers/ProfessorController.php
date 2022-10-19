@@ -32,9 +32,9 @@ class ProfessorController extends Controller
     }
 
     /**
-    * Lists all Professor models.
-    * @return mixed
-    */
+     * Lists all Professor models.
+     * @return mixed
+     */
     public function actionIndex(){
         $dataProvider = new ActiveDataProvider([
             'query' => Professor::find(),
@@ -46,10 +46,10 @@ class ProfessorController extends Controller
     }
 
     /**
-    * Displays a single Professor model.
-    * @param integer $id
-    * @return mixed
-    */
+     * Displays a single Professor model.
+     * @param integer $id
+     * @return mixed
+     */
     public function actionView($id){
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -57,10 +57,10 @@ class ProfessorController extends Controller
     }
 
     /**
-    * Creates a new Professor model.
-    * If creation is successful, the browser will be redirected to the 'view' page.
-    * @return mixed
-    */
+     * Creates a new Professor model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
     public function actionCreate(){
         $model = new Professor();
 
@@ -74,11 +74,11 @@ class ProfessorController extends Controller
     }
 
     /**
-    * Updates an existing Professor model.
-    * If update is successful, the browser will be redirected to the 'view' page.
-    * @param integer $id
-    * @return mixed
-    */
+     * Updates an existing Professor model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
     public function actionUpdate($id){
         $model = $this->findModel($id);
 
@@ -92,27 +92,27 @@ class ProfessorController extends Controller
     }
 
     /**
-    * Deletes an existing Professor model.
-    * If deletion is successful, the browser will be redirected to the 'index' page.
-    * @param integer $id
-    * @return mixed
-    */
+     * Deletes an existing Professor model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
     public function actionDelete($id){
-        if((\app\models\Disciplina::find()->where(['id_professor'=>$id])->all())){
-            Yii::$app->session->setFlash('error', "Professor sendo usado em algum(a) Disciplina.");
-            return $this->redirect(['index']);
-        }
+//        if((\app\models\Disciplina::find()->where(['id_professor'=>$id])->all())){
+//            Yii::$app->session->setFlash('error', "Professor sendo usado em algum(a) Disciplina.");
+//            return $this->redirect(['index']);
+//        }
         $this->findModel($id)->delete();
         return $this->redirect(['index']);
     }
 
     /**
-    * Finds the Professor model based on its primary key value.
-    * If the model is not found, a 404 HTTP exception will be thrown.
-    * @param integer $id
-    * @return Professor the loaded model
-    * @throws NotFoundHttpException if the model cannot be found
-    */
+     * Finds the Professor model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Professor the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
     protected function findModel($id){
         if (($model = Professor::findOne($id)) !== null) {
             return $model;

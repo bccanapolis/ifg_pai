@@ -24,6 +24,11 @@ class QacProfessorPergunta extends \yii\db\ActiveRecord
         return 'qac_professor_pergunta';
     }
 
+    public static function representingColumn()
+    {
+        return 'enunciado';
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -31,10 +36,6 @@ class QacProfessorPergunta extends \yii\db\ActiveRecord
     {
         return [
             [['enunciado'], 'string'],
-            [['curso_id'], 'required'],
-            [['curso_id'], 'default', 'value' => null],
-            [['curso_id'], 'integer'],
-            [['curso_id'], 'exist', 'skipOnError' => true, 'targetClass' => Curso::className(), 'targetAttribute' => ['curso_id' => 'id']],
         ];
     }
 
@@ -46,18 +47,7 @@ class QacProfessorPergunta extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'enunciado' => 'Enunciado',
-            'curso_id' => 'Curso ID',
         ];
-    }
-
-    /**
-     * Gets query for [[Curso]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCurso()
-    {
-        return $this->hasOne(Curso::className(), ['id' => 'curso_id']);
     }
 
     /**

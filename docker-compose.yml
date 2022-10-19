@@ -47,6 +47,9 @@ services:
         condition: service_healthy
     environment:
       PHP_ENABLE_XDEBUG: 0
+      VIRTUAL_HOST: pai.bcc.anapolis.ifg.edu.br
+      VIRTUAL_PORT: 8090
+      LETSENCRYPT_HOST: pai.bcc.anapolis.ifg.edu.br
 
 volumes:
   pai_database:

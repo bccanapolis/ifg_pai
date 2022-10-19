@@ -32,6 +32,8 @@ class AlunoController extends Controller
         ];
     }
 
+
+
     /**
      * Lists all Aluno models.
      * @return mixed
@@ -104,18 +106,18 @@ class AlunoController extends Controller
      */
     public function actionDelete($id)
     {
-        if ((\app\models\AlunoDisciplina::find()->where(['id_aluno' => $id])->all())) {
-            Yii::$app->session->setFlash('error', "Aluno sendo usado em algum(a) Aluno_disciplina.");
-            return $this->redirect(['index']);
-        }
-        if ((\app\models\Avaliacao::find()->where(['id_aluno' => $id])->all())) {
-            Yii::$app->session->setFlash('error', "Aluno sendo usado em algum(a) Avaliacao.");
-            return $this->redirect(['index']);
-        }
-        if ((\app\models\Resposta::find()->where(['id_aluno' => $id])->all())) {
-            Yii::$app->session->setFlash('error', "Aluno sendo usado em algum(a) Resposta.");
-            return $this->redirect(['index']);
-        }
+//        if ((\app\models\AlunoDisciplina::find()->where(['id_aluno' => $id])->all())) {
+//            Yii::$app->session->setFlash('error', "Aluno sendo usado em algum(a) Aluno_disciplina.");
+//            return $this->redirect(['index']);
+//        }
+//        if ((\app\models\Avaliacao::find()->where(['id_aluno' => $id])->all())) {
+//            Yii::$app->session->setFlash('error', "Aluno sendo usado em algum(a) Avaliacao.");
+//            return $this->redirect(['index']);
+//        }
+//        if ((\app\models\Resposta::find()->where(['id_aluno' => $id])->all())) {
+//            Yii::$app->session->setFlash('error', "Aluno sendo usado em algum(a) Resposta.");
+//            return $this->redirect(['index']);
+//        }
         $this->findModel($id)->delete();
         return $this->redirect(['index']);
     }

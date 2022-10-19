@@ -19,7 +19,7 @@
   },
   "minimum-stability": "stable",
   "require": {
-    "php": ">=5.6.0",
+    "php": ">=7.4",
     "yiisoft/yii2": "dev-master",
     "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
     "kartik-v/yii2-widgets": "dev-master",
@@ -28,7 +28,9 @@
     "webvimark/module-user-management": "^1",
     "kartik-v/yii2-grid": "dev-master",
     "lavrentiev/yii2-toastr": "dev-master",
-    "yiisoft/yii2-bootstrap4": "*"
+    "yiisoft/yii2-bootstrap4": "*",
+    "kartik-v/yii2-builder": "dev-master",
+    "kartik-v/yii2-widget-select2": "dev-master"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.1.0",

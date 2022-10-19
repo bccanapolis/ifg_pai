@@ -16,6 +16,10 @@ use Yii;
  */
 class TurmaAluno extends \yii\db\ActiveRecord
 {
+    public static function representingColumn() {
+        return 'id';
+    }
+
     /**
      * {@inheritdoc}
      */

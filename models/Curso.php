@@ -2,7 +2,8 @@
 
 namespace app\models;
 
-use Yii;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "curso".
@@ -16,8 +17,12 @@ use Yii;
  * @property Coordenacao[] $coordenacaos
  * @property Disciplina[] $disciplinas
  */
-class Curso extends \yii\db\ActiveRecord
+class Curso extends ActiveRecord
 {
+    public static $campuses = [
+        'Uruaçu', 'Goiânia', 'Itumbiara', 'Águas Lindas', 'Valparaíso', 'Luziânia', 'Goiânia Oeste', 'Anápolis', 'Formosa', 'Jataí', 'Aparecida de Goiânia', 'Senador Canedo', 'Cidade de Goiás', 'Inhumas'
+    ];
+
     /**
      * {@inheritdoc}
      */
@@ -25,6 +30,12 @@ class Curso extends \yii\db\ActiveRecord
     {
         return 'curso';
     }
+
+    public static function representingColumn()
+    {
+        return 'nome';
+    }
+
 
     /**
      * {@inheritdoc}
@@ -55,7 +66,7 @@ class Curso extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Alunos]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getAlunos()
     {
@@ -65,7 +76,7 @@ class Curso extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Coordenacaos]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getCoordenacaos()
     {
@@ -75,7 +86,7 @@ class Curso extends \yii\db\ActiveRecord
     /**
      * Gets query for [[Disciplinas]].
      *
-     * @return \yii\db\ActiveQuery
+     * @return ActiveQuery
      */
     public function getDisciplinas()
     {

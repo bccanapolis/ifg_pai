@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "qac_coordenador".
  *
@@ -17,10 +15,19 @@ use Yii;
  *
  * @property Aluno $aluno
  * @property Turma $coordenacao
- * @property QacCoordenadorPerguntum $pergunta
+ * @property QacCoordenadorPergunta $pergunta
  */
 class QacCoordenador extends \yii\db\ActiveRecord
 {
+    public static array $notas = [
+        0 => 'Péssimo',
+        1 => 'Ruim',
+        2 => 'Regular',
+        3 => 'Bom',
+        4 => 'Ótimo',
+    ];
+
+
     /**
      * {@inheritdoc}
      */
@@ -28,6 +35,7 @@ class QacCoordenador extends \yii\db\ActiveRecord
     {
         return 'qac_coordenador';
     }
+
 
     /**
      * {@inheritdoc}
@@ -39,7 +47,7 @@ class QacCoordenador extends \yii\db\ActiveRecord
             [['nota', 'semestre', 'ano', 'aluno_id', 'pergunta_id', 'coordenacao_id'], 'integer'],
             [['aluno_id', 'pergunta_id', 'coordenacao_id'], 'required'],
             [['aluno_id'], 'exist', 'skipOnError' => true, 'targetClass' => Aluno::className(), 'targetAttribute' => ['aluno_id' => 'id']],
-            [['pergunta_id'], 'exist', 'skipOnError' => true, 'targetClass' => QacCoordenadorPerguntum::className(), 'targetAttribute' => ['pergunta_id' => 'id']],
+            [['pergunta_id'], 'exist', 'skipOnError' => true, 'targetClass' => QacCoordenadorPergunta::className(), 'targetAttribute' => ['pergunta_id' => 'id']],
             [['coordenacao_id'], 'exist', 'skipOnError' => true, 'targetClass' => Turma::className(), 'targetAttribute' => ['coordenacao_id' => 'id']],
         ];
     }
@@ -87,6 +95,6 @@ class QacCoordenador extends \yii\db\ActiveRecord
      */
     public function getPergunta()
     {
-        return $this->hasOne(QacCoordenadorPerguntum::className(), ['id' => 'pergunta_id']);
+        return $this->hasOne(QacCoordenadorPergunta::className(), ['id' => 'pergunta_id']);
     }
 }

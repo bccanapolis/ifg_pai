@@ -2,7 +2,11 @@
 
 namespace app\controllers;
 
+use app\models\Curso;
+use Yii;
+use yii\data\ActiveDataProvider;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 
 class CursoController extends \yii\web\Controller
 {
@@ -21,29 +25,94 @@ class CursoController extends \yii\web\Controller
         ];
     }
 
-    public function actionCreate()
-    {
-        return $this->render('create');
-    }
-
-    public function actionDelete()
-    {
-        return $this->render('delete');
-    }
-
     public function actionIndex()
     {
-        return $this->render('index');
+        $dataProvider = new ActiveDataProvider([
+            'query' => Curso::find(),
+        ]);
+
+        return $this->render('index', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
-    public function actionUpdate()
+    /**
+     * Displays a single Disciplina model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionView($id)
     {
-        return $this->render('update');
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
     }
 
-    public function actionView()
+    /**
+     * Creates a new Disciplina model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreate()
     {
-        return $this->render('view');
+        $model = new Curso();
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        }
+        return $this->render('create', [
+            'model' => $model,
+        ]);
+
     }
 
+    /**
+     * Updates an existing Disciplina model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException
+     */
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Deletes an existing Disciplina model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Finds the Disciplina model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Curso the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Curso::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
 }

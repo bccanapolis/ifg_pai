@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "aluno".
  *
@@ -27,6 +25,11 @@ class Aluno extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'aluno';
+    }
+
+    public static function representingColumn()
+    {
+        return 'matricula';
     }
 
     /**

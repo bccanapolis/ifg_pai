@@ -9,15 +9,20 @@ use app\extensions\AmpleNav; ?>
         <nav class="sidebar-nav">
                 <?= AmpleNav::widget([
                     "items" => [
+//                        [
+//                            "label" => "Dashboard",
+//                            "icon" => "fa-tachometer-alt",
+//                            "url" => ['/site/index'],
+//                        ],
+//                        [
+//                            "label" => "Perfil",
+//                            "icon" => "fa-user",
+//                            "url" => ['/site/view-profile'],
+//                        ],
                         [
-                            "label" => "Dashboard",
-                            "icon" => "fa-tachometer-alt",
-                            "url" => ['/site/index'],
-                        ],
-                        [
-                            "label" => "Perfil",
-                            "icon" => "fa-user",
-                            "url" => ['/site/view-profile'],
+                            "label" => "Avaliacao Turma",
+                            "icon" => "fa-address-card",
+                            "url" => ['/avaliacao-turma/index'],
                         ],
                         [
                             "label" => "Aluno",
@@ -25,80 +30,66 @@ use app\extensions\AmpleNav; ?>
                             "url" => ['/aluno/index'],
                         ],
                         [
+                            "label" => "Coordenacao",
+                            "icon" => "fa-graduation-cap",
+                            "url" => ['/coordenacao/index'],
+                        ],                        [
+                            "label" => "Curso",
+                            "icon" => "fa-graduation-cap",
+                            "url" => ['/curso/index'],
+                        ],                        [
+                            "label" => "Disciplina",
+                            "icon" => "fa-graduation-cap",
+                            "url" => ['/disciplina/index'],
+                        ],                        [
+                            "label" => "Grafico",
+                            "icon" => "fa-graduation-cap",
+                            "url" => ['/grafico/index'],
+                        ],
+                        [
                             "label" => "Professor",
                             "icon" => "fa-address-card",
                             "url" => ['/professor/index'],
                         ],
                         [
-                            "label" => "Disciplina Grade",
+                            "label" => "QAC Coordenador",
                             "icon" => "fa-address-card",
-                            "url" => ['/disciplina-matriz/index'],
+                            "url" => ['/qac-coordenador/index'],
                         ],
                         [
-                            "label" => "Disciplina",
+                            "label" => "QAC Coordenador Comentários",
                             "icon" => "fa-address-card",
-                            "url" => ['/disciplina/index'],
+                            "url" => ['/qac-coordenador-comentario/index'],
                         ],
                         [
-                            "label" => "Alunos Disciplina",
+                            "label" => "QAC Coordenador Perguntas",
                             "icon" => "fa-address-card",
-                            "url" => ['/aluno-disciplina/index'],
+                            "url" => ['/qac-coordenador-pergunta/index'],
                         ],
                         [
-                            "label" => "Perguntas do ADD",
+                            "label" => "QAC Professor",
                             "icon" => "fa-address-card",
-                            "url" => ['/questao/index'],
+                            "url" => ['/qac-professor/index'],
                         ],
                         [
-                            "label" => "Perguntas da Avaliação",
+                            "label" => "QAC Professor Comentários",
                             "icon" => "fa-address-card",
-                            "url" => ['/pergunta-avaliacao/index'],
+                            "url" => ['/qac-professor-comentario/index'],
                         ],
                         [
-                            "label" => "ADD - Avaliação Diagnóstica do Discente",
+                            "label" => "QAC Professor Perguntas",
                             "icon" => "fa-address-card",
-                            "url" => ['/questionario/listar-perguntas'],
+                            "url" => ['/qac-professor-pergunta/index'],
                         ],
                         [
-                            "label" => "QAC - Questionário de Avaliação do Curso",
+                            "label" => "Turma",
                             "icon" => "fa-address-card",
-                            "url" => ['/avaliacao/create'],
+                            "url" => ['/turma/index'],
                         ],
                         [
-                            "label" => "Perguntas Questionário do Coordenador",
+                            "label" => "Turma Aluno",
                             "icon" => "fa-address-card",
-                            "url" => ['/pergunta-avaliacao-coordenador/index'],
-                        ],
-                        [
-                            "label" => "QACoordenador",
-                            "icon" => "fa-address-card",
-                            "url" => ['/avaliacao-coordenador/create'],
-                        ],
-                        [
-                            "label" => "Gráficos",
-                            "icon" => "fa-chart-pie",
-                            "url" => ['/grafico/index'],
-                        ],
-                        [
-                            "label" => "Notas",
-                            "icon" => "fa-file",
-                            "url" => ['/notas/normalizacao'],
-                        ],
-
-                        [
-                            "label" => "Comentários Avaliação do Coordenador",
-                            "icon" => "fa-address-card",
-                            "url" => ['/comentario-avaliacao-coordenador/index'],
-                        ],
-                        [
-                            "label" => "Comentários Avaliação Disciplinas",
-                            "icon" => "fa-address-card",
-                            "url" => ['/comentario-avaliacao/index'],
-                        ],
-                        [
-                            "label" => "Selecionar Disciplina para Nota",
-                            "icon" => "fa-file",
-                            "url" => ['/notas-disciplina/create'],
+                            "url" => ['/turma-aluno/index'],
                         ],
                     ],
                 ]);

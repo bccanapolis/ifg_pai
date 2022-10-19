@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "qac_professor".
  *
@@ -14,11 +12,19 @@ use Yii;
  * @property int $turma_id
  *
  * @property Aluno $aluno
- * @property QacProfessorPerguntum $pergunta
+ * @property QacProfessorPergunta $pergunta
  * @property Turma $turma
  */
 class QacProfessor extends \yii\db\ActiveRecord
 {
+    public static array $notas = [
+        0 => 'Péssimo',
+        1 => 'Ruim',
+        2 => 'Regular',
+        3 => 'Bom',
+        4 => 'Ótimo',
+    ];
+
     /**
      * {@inheritdoc}
      */
@@ -37,7 +43,7 @@ class QacProfessor extends \yii\db\ActiveRecord
             [['nota', 'pergunta_id', 'aluno_id', 'turma_id'], 'integer'],
             [['pergunta_id', 'aluno_id', 'turma_id'], 'required'],
             [['aluno_id'], 'exist', 'skipOnError' => true, 'targetClass' => Aluno::className(), 'targetAttribute' => ['aluno_id' => 'id']],
-            [['pergunta_id'], 'exist', 'skipOnError' => true, 'targetClass' => QacProfessorPerguntum::className(), 'targetAttribute' => ['pergunta_id' => 'id']],
+            [['pergunta_id'], 'exist', 'skipOnError' => true, 'targetClass' => QacProfessorPergunta::className(), 'targetAttribute' => ['pergunta_id' => 'id']],
             [['turma_id'], 'exist', 'skipOnError' => true, 'targetClass' => Turma::className(), 'targetAttribute' => ['turma_id' => 'id']],
         ];
     }
@@ -73,7 +79,7 @@ class QacProfessor extends \yii\db\ActiveRecord
      */
     public function getPergunta()
     {
-        return $this->hasOne(QacProfessorPerguntum::className(), ['id' => 'pergunta_id']);
+        return $this->hasOne(QacProfessorPergunta::className(), ['id' => 'pergunta_id']);
     }
 
     /**
