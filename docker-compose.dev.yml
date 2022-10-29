@@ -8,4 +8,4 @@ services:
       YII_ENV: dev
     ports:
       - "8080:8080"
-    command: bash -c "php ./yii migrate --interactive=0 && yii serve 0.0.0.0"
+    command: bash -c "cd /usr/local/etc/php/conf.d/ && echo 'memory_limit = -1' >> /usr/local/etc/php/conf.d/docker-php-ram-limit.ini && cd /app && yii serve 0.0.0.0"

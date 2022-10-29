@@ -16,7 +16,7 @@ class m220817_174950_create_turma extends Migration
             'id' => $this->primaryKey(),
             'semestre' => $this->smallInteger('2'),
             'ano' => $this->smallInteger('4'),
-            'professor_id' => $this->integer()->notNull(),
+            'professor_id' => $this->integer()->notNull()->defaultValue(1),
             'disciplina_id' => $this->integer()->notNull(),
             'coordenacao_id' => $this->integer()->notNull(),
         ]);

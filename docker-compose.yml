@@ -49,7 +49,7 @@ services:
       db:
         condition: service_healthy
     networks:
-      - nginx-proxy
+#      - nginx-proxy
       - default
     environment:
       PHP_ENABLE_XDEBUG: 0
@@ -61,6 +61,6 @@ volumes:
   pai_database:
     external: true
 
-networks:
-  nginx-proxy:
-    external: true
+#networks:
+#  nginx-proxy:
+#    external: true

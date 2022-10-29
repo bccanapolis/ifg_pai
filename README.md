@@ -13,4 +13,21 @@ Username: superadmin
 Password: pai@comp2019
 
 
-    
+# Como rodar
+
+Crie um volume para a base de dados
+
+```bash
+docker volume create pai_database
+```
+
+Rodar para o app e as migrations
+```bash
+docker compose up
+```
+
+Rodas para desenvolvimento
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.dev.yml up
+```

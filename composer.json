@@ -30,7 +30,8 @@
     "lavrentiev/yii2-toastr": "dev-master",
     "yiisoft/yii2-bootstrap4": "*",
     "kartik-v/yii2-builder": "dev-master",
-    "kartik-v/yii2-widget-select2": "dev-master"
+    "kartik-v/yii2-widget-select2": "dev-master",
+    "phpoffice/phpspreadsheet": "^1.25"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.1.0",

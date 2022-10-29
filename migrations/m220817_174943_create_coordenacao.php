@@ -14,7 +14,7 @@ class m220817_174943_create_coordenacao extends Migration
     {
         $this->createTable('{{%coordenacao}}', [
             'id' => $this->primaryKey(),
-            'professor_id' => $this->integer()->notNull(),
+            'professor_id' => $this->integer(),
             'curso_id' => $this->integer()->notNull(),
         ]);
 
