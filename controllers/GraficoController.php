@@ -4,12 +4,14 @@ namespace app\controllers;
 
 use app\models\Avaliacao;
 use app\models\AvaliacaoCoordenador;
+use app\models\Coordenacao;
 use app\models\Disciplina;
 use app\models\DisciplinaMatriz;
 use app\models\PerguntaAvaliacaoCoordenador;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\helpers\Json;
+use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 
 /**
@@ -209,15 +211,48 @@ group by periodo;')->queryAll();
 
     }
 
-    public function actionApiCoordenador($pergunta = null)
+    public function actionApiCoordenador($curso = null, $pergunta = null)
     {
         $connection = Yii::$app->db;
-        $res = null;
-        if (is_null($pergunta)) {
-            $res = $connection->createCommand("select count(nota), (case when nota = 0 then 'Péssimo' when nota = 1 then 'Ruim' when nota = 2 then 'Regular' when nota = 3 then 'Bom' when nota = 4 then 'Ótimo' end) as nota, (ano || '-' || semestre) as ano_semestre from avaliacao_coordenador group by nota, ano_semestre;")->queryAll();
 
-        } else {
-            $res = $connection->createCommand("select count(nota), (case when nota = 0 then 'Péssimo' when nota = 1 then 'Ruim' when nota = 2 then 'Regular' when nota = 3 then 'Bom' when nota = 4 then 'Ótimo' end) as nota, (ano || '-' || semestre) as ano_semestre from avaliacao_coordenador left join pergunta_avaliacao_coordenador pac on avaliacao_coordenador.id_pergunta_avaliacao_coordenador = pac.id where pac.id = :pergunta group by nota, ano_semestre;", [':pergunta' => $pergunta])->queryAll();
+        $user = Yii::$app->user;
+
+        if (isset($user->professor)) {
+            $curso = Coordenacao::find()->where(['professor_id' => Yii::$app->user->professor->id])->one()->curso_id;
+        } else if (isset($user->aluno)) {
+            $curso = $user->aluno->curso_id;
+        }
+
+        $res = null;
+        if (!is_null($curso) && is_null($pergunta)) {
+            $res = $connection->createCommand("select count(nota),
+       (case
+            when nota = 0 then 'Péssimo'
+            when nota = 1 then 'Ruim'
+            when nota = 2 then 'Regular'
+            when nota = 3 then 'Bom'
+            when nota = 4 then 'Ótimo' end) as nota,
+       (ano || '-' || semestre)             as ano_semestre
+from qac_coordenador
+join coordenacao on coordenacao.id = qac_coordenador.coordenacao_id
+where coordenacao.curso_id = :curso
+group by nota, ano_semestre;", [':curso' => $curso])->queryAll();
+
+        } else if (!is_null($curso) && !is_null($pergunta)) {
+            $res = $connection->createCommand("select count(nota),
+       (case
+            when nota = 0 then 'Péssimo'
+            when nota = 1 then 'Ruim'
+            when nota = 2 then 'Regular'
+            when nota = 3 then 'Bom'
+            when nota = 4 then 'Ótimo' end) as nota,
+       (ano || '-' || semestre)             as ano_semestre
+from qac_coordenador
+         join coordenacao on coordenacao.id = qac_coordenador.coordenacao_id
+         left join qac_coordenador_pergunta qap on qac_coordenador.pergunta_id = qap.id
+where qap.id = :pergunta
+  and coordenacao.curso_id = :curso
+group by nota, ano_semestre;", [':pergunta' => $pergunta, ':curso' => $curso])->queryAll();
         }
 
         $label = [];
@@ -227,7 +262,7 @@ group by periodo;')->queryAll();
             }
         }
 
-        $matriculados = $this->alunosResponderamAvaliacaoCoordenador();
+        $matriculados = $this->alunosResponderamAvaliacaoCoordenador($curso);
 
         $obj_matriculados = [];
         foreach ($matriculados as $matriculado) {
@@ -239,13 +274,15 @@ group by periodo;')->queryAll();
 
     }
 
-    private function alunosResponderamAvaliacaoCoordenador()
+    private function alunosResponderamAvaliacaoCoordenador($curso)
     {
         $connection = Yii::$app->db;
-        $arr = [];
-        $sql = "select count(distinct avaliacao_coordenador.id_aluno)             as alunos_responderam,
-       (ano || '-' || semestre)             as ano_semestre
-from avaliacao_coordenador
+        $arr = [':curso' => $curso];
+        $sql = "select count(distinct qac_coordenador.aluno_id) as alunos_responderam,
+       (ano || '-' || semestre)                 as ano_semestre
+from qac_coordenador
+         join coordenacao on coordenacao.id = qac_coordenador.coordenacao_id
+where coordenacao.curso_id = :curso
 group by ano_semestre;";
         $res = $connection->createCommand($sql)->bindValues($arr)->queryAll();
         return $res;
